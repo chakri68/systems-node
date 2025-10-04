@@ -1,9 +1,9 @@
-export type OptionalPropertiesOf<T extends Object> = {
-  [K in keyof T]: T[K] extends Record<K, T[K]> ? never : K;
+export type OptionalPropertiesOf<T extends object> = {
+  [K in keyof T]-?: {} extends Pick<T, K> ? K : never;
 }[keyof T];
 
-export type OptionalObjectOf<T extends Object> = {
-  [k in OptionalPropertiesOf<T>]: Exclude<T[k], undefined>;
+export type OptionalObjectOf<T extends object> = {
+  [K in OptionalPropertiesOf<T>]-?: Exclude<T[K], undefined>;
 };
 
 export function mergeOptionals<T extends Object>(
